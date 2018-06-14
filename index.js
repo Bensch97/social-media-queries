@@ -10,13 +10,14 @@ const client = new Client({
 
 app.get('/users', (req, res) => {
     client.query('SELECT * FROM users', (err, result) => {
+        console.log(result)
         res.send(result.rows);
     })
 })
 
-app.get(`/users/${id}`, (req, res) => {
-    client.query('SELECT id FROM users', (err, result) => {
-        res.send(result.rows.id)
+app.get(`/users/:id`, (req, res) => {
+    client.query(`SELECT * FROM users WHERE id = ${req.params.id}`, (err, result) => {
+        res.send(result.rows)
     })
 })
 
